@@ -28,7 +28,7 @@ async function products() {
     `;
     card.addEventListener('click', () => {
       displaydescription(item.strCategory,item.strCategoryDescription)
-      // console.log( item.strCategory);
+
       filterByCategory(item.strCategory);
     });
     product.appendChild(card);
@@ -46,3 +46,22 @@ menubtn.addEventListener('click',()=>{
 closebar.addEventListener('click',()=>{
   sidebar.classList.remove('active')
 })
+async function menubar(){
+  let res=await fetch(CATEGORY_API);
+  let data= await res.json();
+  let category=data.categories
+  console.log(category);
+
+  menulist.innerHTML=''
+  category.forEach(item => {
+    let list=document.createElement('li');
+    list.textContent=item.strCategory
+    list.addEventListener('click',()=>{
+      sidebar.classList.remove('active')
+      displaydescription(item.strCategory,item.strCategoryDescription)
+      filterByCategory(item.strCategory)
+    })
+    menulist.appendChild(list)
+  });
+}
+menubar();
