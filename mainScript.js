@@ -10,3 +10,28 @@ console.log(CATEGORY_API);
 console.log(SEARCH_API + 'Beef')
 console.log(FILTER_BY_CATEGORY_API+'lamb');
 console.log(DETAILS_API+53099);
+
+async function products() {
+  let pr = await fetch(CATEGORY_API);
+  let res = await pr.json();
+  let data = res.categories;
+
+  let product = document.getElementById('product');
+  product.innerHTML = ''; 
+
+  data.forEach((item) => {
+    let card = document.createElement('div');
+    card.className = 'card col-12 col-md-6 col-lg-3 m-lg-3 p-2 text-center text-white';
+    card.innerHTML = `
+      <p class="fw-light rounded px-2 py-1 fs-6 fs-md-5 fs-lg-4">${item.strCategory}</p>
+      <img src="${item.strCategoryThumb}" alt="${item.strCategory}" class="img1 pb-1 rounded">
+    `;
+    card.addEventListener('click', () => {
+      displaydescription(item.strCategory,item.strCategoryDescription)
+      // console.log( item.strCategory);
+      filterByCategory(item.strCategory);
+    });
+    product.appendChild(card);
+  });
+}
+products();

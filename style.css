@@ -9,3 +9,39 @@
   --bs-secondary: #e75710;
   --bs-danger:var(--bg);
 }
+.text-secondary{
+  color: var(--bg) !important;
+}
+.bg-warning{
+  color: var(--bg) !important;
+}
+.text-danger{
+  color: var(--bg) !important;
+}
+
+.navbar{
+    background-color: var(--bg);
+}
+#home{
+    position: relative;
+    /* height: 90vh; */
+    overflow: hidden;
+}
+#home img {
+  width: 100%;
+  object-fit: cover;
+  filter: brightness(70%);
+}
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
