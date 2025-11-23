@@ -75,3 +75,41 @@ async function searchitem(dish) {
   let data = await res.json();
   return data;
 }
+// function displaysearchitem(meal) {
+//   itemdisplay.innerHTML += `
+//        <div class="col-12 col-md-6 col-lg-3 m-lg-3 shadow ">
+//          <img src="${meal.strMealThumb}" alt="${meal.strMeal}" class="img1 pb-1">
+//          <p class='border bg-secondary-emphasis rounded-2 px-2 d-inline mt-3 '>${meal.strArea}</p>
+//          <p class="text-black fw-bold rounded px-2 fs-6 fs-md-5 fs-lg-4">${meal.strMeal}</p>
+//        </div>
+//    `;
+// }
+searchbtn.addEventListener('click', async () => {
+  let m=document.getElementById('meal')
+  m.innerHTML=`<h4 class='text-black fw-bold'>MEAL</h4>`;
+  let a = searchinput.value.trim();
+  itemdisplay.innerHTML = ""; 
+  if (a) {
+         let result = await searchitem(a);
+         if (result.meals) {
+           result.meals.forEach((meal) =>{
+              let cards=document.createElement('div')
+              cards.className='col-12 col-md-6 col-lg-3 m-lg-3 shadow'
+              cards.innerHTML=`
+             <img src="${meal.strMealThumb}" alt="${meal.strMeal}" class="img1 pb-1">
+             <p class='border bg-secondary-emphasis rounded-2 px-2 d-inline mt-3 '>${meal.strArea}</p>
+             <p class="text-black fw-bold rounded px-2 fs-6 fs-md-5 fs-lg-4">${meal.strMeal}</p>
+       `;
+       cards.addEventListener('click',()=>{ //clicking on particular item display full deatails of particular item
+         detailsAboutpaticularitem(meal.idMeal)
+       });
+       itemdisplay.appendChild(cards);  
+      });
+    } else {
+      itemdisplay.innerHTML = `<h3>Search item is not found.</h3>`;
+    }
+  } 
+  else {
+    itemdisplay.innerHTML = `<h3>Please enter a category to search.</h3>`;
+  }
+});
