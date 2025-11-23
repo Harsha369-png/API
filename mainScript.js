@@ -34,4 +34,15 @@ async function products() {
     product.appendChild(card);
   });
 }
-products();
+products(); 
+let menubtn=document.getElementById('menubtn')
+let sidebar=document.getElementById('sidebar')
+let closebar=document.getElementById('close')
+let menulist=document.getElementById('menulist')
+
+menubtn.addEventListener('click',()=>{
+  sidebar.classList.add('active')
+})
+closebar.addEventListener('click',()=>{
+  sidebar.classList.remove('active')
+})

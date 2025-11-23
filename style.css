@@ -45,3 +45,23 @@
   align-items: center;
   text-align: center;
 }
+.search-box {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 50px;
+  padding: 8px 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 200px;
+}
+.search-box input {
+  border: none;
+  outline: none;
+  background: transparent;
+  flex: 1;
+}
+.symbol{
+    padding: 10px;
+    color: var(--text);
+    background-color: var(--bg);
+}
