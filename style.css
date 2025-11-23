@@ -1,0 +1,11 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins", sans-serif;
+}
+:root {
+  --bg:  rgb(232, 95, 10);
+  --text: #e5e7eb;
+  --bs-secondary: #e75710;
+  --bs-danger:var(--bg);
+}
