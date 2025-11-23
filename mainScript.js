@@ -65,3 +65,13 @@ async function menubar(){
   });
 }
 menubar();
+let searchinput = document.getElementById('input');
+let searchbtn = document.getElementById('searchbtn');
+let itemdisplay = document.getElementById('searchitemdisplay');
+
+//search  from api
+async function searchitem(dish) {
+  let res = await fetch(SEARCH_API + dish);
+  let data = await res.json();
+  return data;
+}
