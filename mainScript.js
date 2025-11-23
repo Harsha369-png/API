@@ -113,3 +113,46 @@ searchbtn.addEventListener('click', async () => {
     itemdisplay.innerHTML = `<h3>Please enter a category to search.</h3>`;
   }
 });
+// displaying click of particular dish on sidebar
+// onclick="filter(${items})"
+let displayMeal=document.getElementById('searchitemdisplay') //instead of displaymeal rendor on search item
+let Meald=document.getElementById('meal') //here insread of meald
+
+function displaydescription(name,discription){
+  Meald.innerHTML=`<div class="border border-secondary p-3">
+  <h2 class='text-danger'>${name}</h2>
+  <p class="p-3 fw-lg fs-xl">${discription}</p>
+  </div>
+  `
+}
+// function displaymeals(meals) {
+//   displayMeal.innerHTML = ''; // clear previous items
+//   // displayMeal.innerHTML=`<div>${meals.strCategoryDescription}</div>`
+//   meals.forEach(meal => {
+//     displayMeal.innerHTML += `
+//       <div class="card col-12 col-md-6 col-lg-3 m-lg-3" onclick="detailsAboutpaticularitem(${meal.idMeal})">
+//         <p class="text-center text-white fw-light rounded px-2 py-1 align-items-end fs-6 fs-md-5 fs-lg-4">${meal.strMeal}</p>
+//         <img src="${meal.strMealThumb}" alt="${meal.strMeal}" class="img1 pb-1">
+//       </div>
+//     `;
+//   });
+// }
+function displaymeals(meals) {
+  displayMeal.innerHTML = ''; 
+  // Meald.innerText='MEAL';
+  //document.getElementById('mealheading').innerText='MEAL'
+  meals.forEach(meal => {
+    let cards = document.createElement('div');
+    cards.className = 'col-12 col-md-6 col-lg-3 m-lg-3 shadow-lg bg-body-tertiary rounded';
+    cards.innerHTML += `
+      <img src='${meal.strMealThumb}' alt='${meal.strMeal}' class='img1 pb-1'>
+      <h5 class='text-dark text-center fw-semi-bold'>${meal.strMeal}</h5>
+    `;
+    cards.addEventListener('click', () => {
+      Meald.innerHTML=' ';
+      detailsAboutpaticularitem(meal.idMeal); //paticular item will display with full information 
+    });
+
+    displayMeal.appendChild(cards);
+  });
+}
