@@ -150,9 +150,16 @@ function displaymeals(meals) {
     `;
     cards.addEventListener('click', () => {
       Meald.innerHTML=' ';
-      detailsAboutpaticularitem(meal.idMeal); //paticular item will display with full information 
+      detailsAboutpaticularitem(meal.idMeal); 
     });
 
     displayMeal.appendChild(cards);
   });
+}
+// details about particular item
+async function detailsAboutpaticularitem(item){
+   let res= await fetch(DETAILS_API+item)
+   let data =await res.json()
+   let meal=data.meals[0]
+   displayParticularItem(meal)
 }
