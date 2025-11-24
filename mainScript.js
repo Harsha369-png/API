@@ -163,3 +163,36 @@ async function detailsAboutpaticularitem(item){
    let meal=data.meals[0]
    displayParticularItem(meal)
 }
+function displayParticularItem(item) {
+
+  let ingredientslist = '';
+  for (let i = 1; i <= 20; i++) {
+    let ingredient = item[`strIngredient${i}`];
+    if (ingredient && ingredient.trim() !== '') {
+      ingredientslist += `<li class="list-group-item border-0 bg-transparent">${ingredient}</li>`;
+    }
+  }
+
+  let measurementlist = '';
+  for (let i = 1; i <= 20; i++) {
+    let measurement = item[`strMeasure${i}`];
+    if (measurement && measurement.trim() !== '') {
+      measurementlist += `
+        <li class="list-group-item border-0 bg-transparent">
+          <i class="fa-solid fa-spoon text-danger me-2"></i> ${measurement}
+        </li>`;
+    }
+  }
+let instructionList = '';
+  if (item.strInstructions && item.strInstructions.trim() !== '') {
+    let steps = item.strInstructions.split('.').filter(step => step.trim() !== '');
+    instructionList = steps.map(step => `<li>${step.trim()}.</li>`).join('');
+  } else {
+    instructionList = '<li>No instructions found.</li>';
+  }
+
+  itemdisplay.innerHTML = `
+    <div class="bgorange d-flex align-items-center mb-3 rounded">
+      <i class="fa-solid fa-house text-white fs-4 me-2"></i>
+      <h4 class="text-white px-3 py-2 rounded mb-0">${item.strMeal}</h4>
+    </div>
