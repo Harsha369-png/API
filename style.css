@@ -122,3 +122,17 @@
 .bgorange{
   background-color: var(--bg);
 }
+
+.text-secondary { 
+    color: white
+}
+
+.bg-warning {
+    background-color: var(--bg); 
+    color: white; 
+}
+
+.card p {
+    background-color: var(--bg);
+    color:white 
+}
