@@ -99,10 +99,7 @@
 #menubtn{
   color: azure;
 }
-
-/* categorey */
 .card{
-    /* width: 30%; */
     box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
     place-items:end;
     box-shadow: rgba(38, 57, 77, 0.2) 0px 15px 25px;
