@@ -87,3 +87,38 @@
 #sidebar.active{
   right:  0;
 }
+#sidebar ul li{
+  padding: 10px 15px;
+  border-bottom: 1px solid rgba(13, 9, 9, 0.4);
+  cursor: pointer;
+  transition: background 0.4s;
+}
+#sidebar ul li:hover{
+  background-color: rgb(255, 255, 255);
+  color: var(--bg);
+}
+#menubtn{
+  color: azure;
+}
+
+/* categorey */
+.card{
+    /* width: 30%; */
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+    place-items:end; 
+}
+.card p{
+  background-color: var(--bg);
+}
+.img1{
+  transition: transform 0.4s ease-in-out;
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.img1:hover {
+  transform: scale(0.8);
+}
+.bgorange{
+  background-color: var(--bg);
+}

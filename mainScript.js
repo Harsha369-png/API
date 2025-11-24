@@ -1,3 +1,5 @@
+
+
 const fetchData = "https://www.themealdb.com/api/json/v1/1/";
 
 const CATEGORY_API = fetchData + "categories.php";
@@ -27,14 +29,15 @@ async function products() {
       <img src="${item.strCategoryThumb}" alt="${item.strCategory}" class="img1 pb-1 rounded">
     `;
     card.addEventListener('click', () => {
-      displaydescription(item.strCategory,item.strCategoryDescription)
-
+      displaydescription(item.strCategory,item.strCategoryDescription) //click on particur category display that category
+      // console.log( item.strCategory);
       filterByCategory(item.strCategory);
     });
     product.appendChild(card);
   });
 }
-products(); 
+products();
+
 let menubtn=document.getElementById('menubtn')
 let sidebar=document.getElementById('sidebar')
 let closebar=document.getElementById('close')
@@ -46,6 +49,7 @@ menubtn.addEventListener('click',()=>{
 closebar.addEventListener('click',()=>{
   sidebar.classList.remove('active')
 })
+
 async function menubar(){
   let res=await fetch(CATEGORY_API);
   let data= await res.json();
@@ -58,13 +62,16 @@ async function menubar(){
     list.textContent=item.strCategory
     list.addEventListener('click',()=>{
       sidebar.classList.remove('active')
-      displaydescription(item.strCategory,item.strCategoryDescription)
-      filterByCategory(item.strCategory)
+      displaydescription(item.strCategory,item.strCategoryDescription) //same as home productafter clicking on sider bar display first description of item passing name and description
+      filterByCategory(item.strCategory) //then its category will display
     })
     menulist.appendChild(list)
   });
 }
 menubar();
+
+
+// and search items display
 let searchinput = document.getElementById('input');
 let searchbtn = document.getElementById('searchbtn');
 let itemdisplay = document.getElementById('searchitemdisplay');
@@ -75,6 +82,7 @@ async function searchitem(dish) {
   let data = await res.json();
   return data;
 }
+
 // function displaysearchitem(meal) {
 //   itemdisplay.innerHTML += `
 //        <div class="col-12 col-md-6 col-lg-3 m-lg-3 shadow ">
@@ -84,6 +92,7 @@ async function searchitem(dish) {
 //        </div>
 //    `;
 // }
+
 searchbtn.addEventListener('click', async () => {
   let m=document.getElementById('meal')
   m.innerHTML=`<h4 class='text-black fw-bold'>MEAL</h4>`;
@@ -113,6 +122,8 @@ searchbtn.addEventListener('click', async () => {
     itemdisplay.innerHTML = `<h3>Please enter a category to search.</h3>`;
   }
 });
+
+
 // displaying click of particular dish on sidebar
 // onclick="filter(${items})"
 let displayMeal=document.getElementById('searchitemdisplay') //instead of displaymeal rendor on search item
@@ -137,6 +148,7 @@ function displaydescription(name,discription){
 //     `;
 //   });
 // }
+
 function displaymeals(meals) {
   displayMeal.innerHTML = ''; 
   // Meald.innerText='MEAL';
@@ -150,12 +162,20 @@ function displaymeals(meals) {
     `;
     cards.addEventListener('click', () => {
       Meald.innerHTML=' ';
-      detailsAboutpaticularitem(meal.idMeal); 
+      detailsAboutpaticularitem(meal.idMeal); //paticular item will display with full information 
     });
 
     displayMeal.appendChild(cards);
   });
 }
+
+
+async function filterByCategory(category) {
+  const res = await fetch(FILTER_BY_CATEGORY_API + category);
+  const data = await res.json();
+  displaymeals(data.meals);
+}
+
 // details about particular item
 async function detailsAboutpaticularitem(item){
    let res= await fetch(DETAILS_API+item)
@@ -172,7 +192,6 @@ function displayParticularItem(item) {
       ingredientslist += `<li class="list-group-item border-0 bg-transparent">${ingredient}</li>`;
     }
   }
-
   let measurementlist = '';
   for (let i = 1; i <= 20; i++) {
     let measurement = item[`strMeasure${i}`];
@@ -183,16 +202,59 @@ function displayParticularItem(item) {
         </li>`;
     }
   }
-let instructionList = '';
+  let instructionList = '';
   if (item.strInstructions && item.strInstructions.trim() !== '') {
     let steps = item.strInstructions.split('.').filter(step => step.trim() !== '');
     instructionList = steps.map(step => `<li>${step.trim()}.</li>`).join('');
   } else {
     instructionList = '<li>No instructions found.</li>';
   }
-
   itemdisplay.innerHTML = `
     <div class="bgorange d-flex align-items-center mb-3 rounded">
       <i class="fa-solid fa-house text-white fs-4 me-2"></i>
       <h4 class="text-white px-3 py-2 rounded mb-0">${item.strMeal}</h4>
     </div>
+
+    <h3 class="text-dark py-2 fw-bold border-bottom-danger">Meal Details</h3>
+
+    <div class="row bg-light rounded shadow p-4 mt-3">
+      <div class="col-md-5 text-center">
+        <img src="${item.strMealThumb}" class="img-fluid rounded border border-3 shadow-sm" alt="${item.strMeal}">
+      </div>
+
+      <div class="col-md-7">
+        <h3 class="text-danger border-bottom pb-2">${item.strMeal}</h3>
+        <p><strong>Category:</strong> ${item.strCategory}</p>
+        <p><strong>Area:</strong> ${item.strArea}</p>
+        <p><strong>Source:</strong> 
+          <a href="${item.strSource}" target="_blank" class="text-primary text-decoration-none">
+            ${item.strSource}
+          </a>
+        </p>
+        <p class="bg-secondary-emphasis p-2 "><strong class='text-dander p-2 border-dark rounded'>Tags:</strong>${item.strTags}</p>
+      </div>
+      <div class="col-12 mt-4">
+        <div class="row">
+          <div class="col-md-6">
+            <h5 class="text-dark p-2 fw-bold">Ingredients</h5>
+            <ol class="list-group list-group-numbered">
+              ${ingredientslist}
+            </ol>
+          </div>
+          <div class="col-md-6">
+            <h5 class="text-dark p-2 fw-bold">Measurements</h5>
+            <ul class="list-group">
+              ${measurementlist}
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 mt-4">
+        <h5 class="text-dark fw-bold p-2">Instructions</h5>
+        <ol class="ps-3">
+          ${instructionList}
+        </ol>
+      </div>
+    </div>
+  `;
+}
