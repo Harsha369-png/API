@@ -83,15 +83,6 @@ async function searchitem(dish) {
   return data;
 }
 
-// function displaysearchitem(meal) {
-//   itemdisplay.innerHTML += `
-//        <div class="col-12 col-md-6 col-lg-3 m-lg-3 shadow ">
-//          <img src="${meal.strMealThumb}" alt="${meal.strMeal}" class="img1 pb-1">
-//          <p class='border bg-secondary-emphasis rounded-2 px-2 d-inline mt-3 '>${meal.strArea}</p>
-//          <p class="text-black fw-bold rounded px-2 fs-6 fs-md-5 fs-lg-4">${meal.strMeal}</p>
-//        </div>
-//    `;
-// }
 
 searchbtn.addEventListener('click', async () => {
   let m=document.getElementById('meal')
@@ -151,8 +142,7 @@ function displaydescription(name,discription){
 
 function displaymeals(meals) {
   displayMeal.innerHTML = ''; 
-  // Meald.innerText='MEAL';
-  //document.getElementById('mealheading').innerText='MEAL'
+  
   meals.forEach(meal => {
     let cards = document.createElement('div');
     cards.className = 'col-12 col-md-6 col-lg-3 m-lg-3 shadow-lg bg-body-tertiary rounded';
