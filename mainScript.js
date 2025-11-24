@@ -1,5 +1,3 @@
-
-
 const fetchData = "https://www.themealdb.com/api/json/v1/1/";
 
 const CATEGORY_API = fetchData + "categories.php";
@@ -127,19 +125,6 @@ function displaydescription(name,discription){
   </div>
   `
 }
-// function displaymeals(meals) {
-//   displayMeal.innerHTML = ''; // clear previous items
-//   // displayMeal.innerHTML=`<div>${meals.strCategoryDescription}</div>`
-//   meals.forEach(meal => {
-//     displayMeal.innerHTML += `
-//       <div class="card col-12 col-md-6 col-lg-3 m-lg-3" onclick="detailsAboutpaticularitem(${meal.idMeal})">
-//         <p class="text-center text-white fw-light rounded px-2 py-1 align-items-end fs-6 fs-md-5 fs-lg-4">${meal.strMeal}</p>
-//         <img src="${meal.strMealThumb}" alt="${meal.strMeal}" class="img1 pb-1">
-//       </div>
-//     `;
-//   });
-// }
-
 function displaymeals(meals) {
   displayMeal.innerHTML = ''; 
   
@@ -152,7 +137,7 @@ function displaymeals(meals) {
     `;
     cards.addEventListener('click', () => {
       Meald.innerHTML=' ';
-      detailsAboutpaticularitem(meal.idMeal); //paticular item will display with full information 
+      detailsAboutpaticularitem(meal.idMeal);
     });
 
     displayMeal.appendChild(cards);
@@ -204,9 +189,7 @@ function displayParticularItem(item) {
       <i class="fa-solid fa-house text-white fs-4 me-2"></i>
       <h4 class="text-white px-3 py-2 rounded mb-0">${item.strMeal}</h4>
     </div>
-
     <h3 class="text-dark py-2 fw-bold border-bottom-danger">Meal Details</h3>
-
     <div class="row bg-light rounded shadow p-4 mt-3">
       <div class="col-md-5 text-center">
         <img src="${item.strMealThumb}" class="img-fluid rounded border border-3 shadow-sm" alt="${item.strMeal}">
